@@ -1,6 +1,20 @@
 import argparse
 import os
 
+def safelife_dir(seed, log_id, gpu_id):
+
+	cmd = " python main.py --env_name safelife-dir \
+	--alg_name mql --policy_freq 4 \
+	--expl_noise 0.2 --enable_context  --num_train_steps 1000 \
+	--cuda_deterministic  --history_length  25  --beta_clip 1.2 \
+	--enable_adaptation  --num_initial_steps 1500 --main_snap_iter_nums 400 \
+	--snap_iter_nums 5 --hidden_sizes  300 300  --lam_csc  0.05 \
+	--snapshot_size 2000 --lr  0.0003 --sample_mult 5  --use_epi_len_steps \
+	--unbounded_eval_hist  --hiddens_conext 30  --num_tasks_sample 5 --burn_in  10000 \
+	--batch_size 256 --policy_noise 0.4 --eval_freq 10000 --replay_size 1000000 " + \
+	' --log_id ' + log_id + ' --seed ' + str(seed) + ' --gpu_id ' + str(gpu_id)
+	return cmd
+
 def ant_dir(seed, log_id, gpu_id):
 
 	cmd = " python main.py --env_name ant-dir \
@@ -96,7 +110,11 @@ if __name__ == "__main__":
 	print('------------')
 
 	cmd = ''
-	if args.env_name == 'ant-dir':
+
+	if args.env_name == 'safelife-dir':
+		cmd = safelife_dir(args.seed, args.log_id, args.gpu_id)
+
+	elif args.env_name == 'ant-dir':
 		cmd = ant_dir(args.seed, args.log_id, args.gpu_id)
 
 	elif args.env_name  == 'ant-goal':
@@ -117,13 +135,3 @@ if __name__ == "__main__":
 	# run the code
 	print(cmd)
 	os.system(cmd)
-
-
-
-
-
-
-
-
-
-

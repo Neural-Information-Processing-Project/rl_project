@@ -189,6 +189,8 @@ def config_tasks_envs(eparams):
         num_steps_per_eval  400
         num_train_steps_per_itr 4000
     '''
+    print("eparams: ", eparams)
+    print("eparams.env_configs: ", eparams.env_configs)
     configs = read_json(eparams.env_configs)[eparams.env_name]
     temp_params = vars(eparams)
     for k, v in configs.items():
@@ -494,6 +496,10 @@ if __name__ == "__main__":
     ##### env setup #####
     env = make_env(args)
 
+    print(env)
+    print(env.observation_space)
+    print(env.action_space)
+
     ######### SEED ##########
     #  build_env already calls set seed,
     # Set seed the RNG for all devices (both CPU and CUDA)
@@ -507,8 +513,14 @@ if __name__ == "__main__":
         torch.backends.cudnn.deterministic = True
         print("****** cudnn.deterministic is set ******")
 
+    print(env.observation_space.shape)
+
     ######### Build Networks
-    max_action = float(env.action_space.high[0])
+    if type(env.action_space.high)=='list':
+        max_action = float(env.action_space.high[0])
+    else:
+        max_action = float(env.action_space.high)
+
     if len(env.observation_space.shape) == 1:
         import models.networks as net
 
@@ -517,9 +529,9 @@ if __name__ == "__main__":
         ######
         if args.enable_context == True:
             reward_dim = 1
+            print(env.action_space.shape)
             input_dim_context =   env.action_space.shape[0] + reward_dim
             args.output_dim_conext =  (env.action_space.shape[0] + reward_dim) * 2
-
 
             if args.only_concat_context == 3: # means use LSTM with action_reward_state as an input
                 input_dim_context = env.action_space.shape[0] + reward_dim + env.observation_space.shape[0]
