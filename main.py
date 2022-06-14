@@ -496,9 +496,12 @@ if __name__ == "__main__":
     ##### env setup #####
     env = make_env(args)
 
-    print(env)
-    print(env.observation_space)
-    print(env.action_space)
+    print("env: ", env)
+    print("observation_space: ", env.observation_space)
+    print("action_space: ", env.action_space)
+
+    print("observation space shape: ", env.observation_space.shape)
+    print("action space shape: ", env.action_space.shape)
 
     ######### SEED ##########
     #  build_env already calls set seed,
@@ -513,13 +516,12 @@ if __name__ == "__main__":
         torch.backends.cudnn.deterministic = True
         print("****** cudnn.deterministic is set ******")
 
-    print(env.observation_space.shape)
-
     ######### Build Networks
-    if type(env.action_space.high)=='list':
-        max_action = float(env.action_space.high[0])
-    else:
-        max_action = float(env.action_space.high)
+    #if type(env.action_space.high)=='list':
+    #    max_action = float(env.action_space.high[0])
+    #else:
+    #    max_action = float(env.action_space.high)
+    max_action = float(env.action_space.high[0])
 
     if len(env.observation_space.shape) == 1:
         import models.networks as net
@@ -662,6 +664,9 @@ if __name__ == "__main__":
 
     ##### rollout/batch generator
     train_tasks, eval_tasks = sample_env_tasks(env, args)
+
+    print("train tasks type ", train_tasks)
+    print("eval tasks type ", eval_tasks)
 
     tasks_buffer.init(train_tasks)
     alg.set_tasks_list(train_tasks)

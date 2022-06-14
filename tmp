@@ -1,0 +1,16 @@
+humanoid-dir:
+
+env:  Normalized: <HumanoidDirEnv instance>
+observation_space:  Box(-inf, inf, (376,), float64)
+action_space:  Box(-1.0, 1.0, (17,), float32)
+observation space shape:  (376,)
+action space shape:  (17,)
+(17,)
+
+safelife-dir:
+
+env:  Normalized: <SafeLifeEnv instance>
+observation_space:  Box(0, 1, (15, 15, 15), uint8)
+action_space:  Box(-1.0, 1.0, (), float32)
+observation space shape:  (15, 15, 15)
+action space shape:  ()
