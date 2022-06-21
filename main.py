@@ -12,6 +12,10 @@ from misc.utils import set_global_seeds, safemean, read_json
 from misc import logger
 from algs.MQL.buffer import Buffer
 
+from memory_profiler import profile
+import objgraph
+from pympler import asizeof
+
 parser = argparse.ArgumentParser()
 
 # Optim params
@@ -647,6 +651,7 @@ if __name__ == "__main__":
                     )
         ##### rollout/batch generator
         tasks_buffer = MultiTasksSnapshot(max_size = args.snapshot_size)
+        print("runner arguments: ", env, alg, replay_buffer, tasks_buffer, args.burn_in, args.expl_noise, args.total_timesteps, args.max_path_length, args.history_length, device)
         rollouts = Runner(env = env,
                           model = alg,
                           replay_buffer = replay_buffer,
@@ -770,6 +775,15 @@ if __name__ == "__main__":
             if update_iter >= max_cold_start:
                 keep_sampling = False
                 break
+            print("-----------------")
+            objgraph.show_growth()
+            print("env size", asizeof.asizeof(env))
+            print("rollouts size", asizeof.asizeof(rollouts))
+            print("args size", asizeof.asizeof(args))
+            print("epinfobuf size", asizeof.asizeof(epinfobuf))
+            print("epinfobuf2 size", asizeof.asizeof(epinfobuf_v2))
+            print(":::::::::::::::::::::::")
+            print("leaking objects size: ", len(objgraph.get_leaking_objects()))
 
     print('There are %d samples in buffer now' % replay_buffer.size_rb())
     print('Average length %.2f for %d episode_nums for %d max_cold_start steps' % (avg_length/episode_num, episode_num, max_cold_start))

@@ -1,0 +1,1061 @@
+Logging to /tmp/openai-2022-06-15-15-33-53-082768
+------------
+{'lr': 0.0003, 'replay_size': 500000, 'ptau': 0.005, 'gamma': 0.99, 'burn_in': 10000, 'total_timesteps': 5000000.0, 'expl_noise': 0.2, 'batch_size': 256, 'policy_noise': 0.4, 'noise_clip': 0.5, 'policy_freq': 4, 'hidden_sizes': [300, 300], 'env_name': 'safelife-dir', 'seed': 0, 'alg_name': 'mql', 'disable_cuda': False, 'cuda_deterministic': True, 'gpu_id': 0, 'log_id': 'dummy', 'check_point_dir': './ck', 'log_dir': './log_dir', 'log_interval': 10, 'save_freq': 250, 'eval_freq': 10000.0, 'env_configs': './configs/pearl_envs.json', 'max_path_length': 200, 'enable_train_eval': False, 'enable_promp_envs': False, 'num_initial_steps': 1500, 'unbounded_eval_hist': True, 'hiddens_conext': [30], 'enable_context': True, 'only_concat_context': 3, 'num_tasks_sample': 5, 'num_train_steps': 1000, 'min_buffer_size': 100000, 'history_length': 25, 'beta_clip': 1.2, 'snapshot_size': 2000, 'prox_coef': 0.1, 'meta_batch_size': 10, 'enable_adaptation': True, 'main_snap_iter_nums': 400, 'snap_iter_nums': 5, 'type_of_training': 'td3', 'lam_csc': 0.05, 'use_ess_clipping': False, 'enable_beta_obs_cxt': False, 'sampling_style': 'replay', 'sample_mult': 5, 'use_epi_len_steps': True, 'use_normalized_beta': False, 'reset_optims': False, 'lr_milestone': -1, 'lr_gamma': 0.8}
+------------
+Read Tasks/Env config params and Update args
+eparams:  Namespace(alg_name='mql', batch_size=256, beta_clip=1.2, burn_in=10000, check_point_dir='./ck', cuda_deterministic=True, disable_cuda=False, enable_adaptation=True, enable_beta_obs_cxt=False, enable_context=True, enable_promp_envs=False, enable_train_eval=False, env_configs='./configs/pearl_envs.json', env_name='safelife-dir', eval_freq=10000.0, expl_noise=0.2, gamma=0.99, gpu_id=0, hidden_sizes=[300, 300], hiddens_conext=[30], history_length=25, lam_csc=0.05, log_dir='./log_dir', log_id='dummy', log_interval=10, lr=0.0003, lr_gamma=0.8, lr_milestone=-1, main_snap_iter_nums=400, max_path_length=200, meta_batch_size=10, min_buffer_size=100000, noise_clip=0.5, num_initial_steps=1500, num_tasks_sample=5, num_train_steps=1000, only_concat_context=3, policy_freq=4, policy_noise=0.4, prox_coef=0.1, ptau=0.005, replay_size=500000, reset_optims=False, sample_mult=5, sampling_style='replay', save_freq=250, seed=0, snap_iter_nums=5, snapshot_size=2000, total_timesteps=5000000.0, type_of_training='td3', unbounded_eval_hist=True, use_epi_len_steps=True, use_ess_clipping=False, use_normalized_beta=False)
+eparams.env_configs:  ./configs/pearl_envs.json
+{'lr': 0.0003, 'replay_size': 500000, 'ptau': 0.005, 'gamma': 0.99, 'burn_in': 10000, 'total_timesteps': 5000000.0, 'expl_noise': 0.2, 'batch_size': 256, 'policy_noise': 0.4, 'noise_clip': 0.5, 'policy_freq': 4, 'hidden_sizes': [300, 300], 'env_name': 'safelife-dir', 'seed': 0, 'alg_name': 'mql', 'disable_cuda': False, 'cuda_deterministic': True, 'gpu_id': 0, 'log_id': 'dummy', 'check_point_dir': './ck', 'log_dir': './log_dir', 'log_interval': 10, 'save_freq': 250, 'eval_freq': 10000.0, 'env_configs': './configs/pearl_envs.json', 'max_path_length': 200, 'enable_train_eval': False, 'enable_promp_envs': False, 'num_initial_steps': 1500, 'unbounded_eval_hist': True, 'hiddens_conext': [30], 'enable_context': True, 'only_concat_context': 3, 'num_tasks_sample': 5, 'num_train_steps': 1000, 'min_buffer_size': 100000, 'history_length': 25, 'beta_clip': 1.2, 'snapshot_size': 2000, 'prox_coef': 0.1, 'meta_batch_size': 10, 'enable_adaptation': True, 'main_snap_iter_nums': 400, 'snap_iter_nums': 5, 'type_of_training': 'td3', 'lam_csc': 0.05, 'use_ess_clipping': False, 'enable_beta_obs_cxt': False, 'sampling_style': 'replay', 'sample_mult': 5, 'use_epi_len_steps': True, 'use_normalized_beta': False, 'reset_optims': False, 'lr_milestone': -1, 'lr_gamma': 0.8, 'n_train_tasks': 1, 'n_eval_tasks': 1, 'n_tasks': 2, 'randomize_tasks': True, 'low_gear': False, 'forward_backward': True, 'num_evals': 4, 'num_steps_per_task': 400, 'num_steps_per_eval': 400, 'num_train_steps_per_itr': 4000}
+**** No GPU detected or GPU usage is disabled, sorry! ****
+Logging to ./log_dir/safelife-dir_mql_dummy
+/home/adrian/studium/master/sem3/rl_project/rlkit/envs/safelife/levels/random/append-dynamic.yaml
+wrapped action space:  Discrete(9)
+env:  Normalized: <SafeLifeEnv instance>
+observation_space:  Box(0.0, 1.0, (3375,), float32)
+action_space:  Box(0.0, 0.9999999, (1,), float32)
+observation space shape:  (3375,)
+action space shape:  (1,)
+(1,)
+**** TD3 style is selected ****
+-----------------------------
+Optim Params
+Actor:
+  Adam (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.9, 0.999)
+    eps: 1e-08
+    lr: 0.0003
+    maximize: False
+    weight_decay: 0
+)
+Critic:
+  Adam (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.9, 0.999)
+    eps: 1e-08
+    lr: 0.0003
+    maximize: False
+    weight_decay: 0
+)
+********
+reset_optims:  False
+use_ess_clipping:  False
+use_normalized_beta:  False
+enable_beta_obs_cxt:  False
+********
+-----------------------------
+runner arguments:  Normalized: <SafeLifeEnv instance> <algs.MQL.mql.MQL object at 0x7f5cb37905e0> <algs.MQL.buffer.Buffer object at 0x7f5cb3790640> <algs.MQL.multi_tasks_snapshot.MultiTasksSnapshot object at 0x7f5ca2def2b0> 10000 0.2 5000000.0 200 25 cpu
+train tasks type  [0]
+eval tasks type  [0]
+-----------------------------
+Name of env: safelife-dir
+Observation_space: Box(0.0, 1.0, (3375,), float32)
+Action space: Box(0.0, 0.9999999, (1,), float32)
+Tasks: 2
+Train tasks: 1
+Eval tasks: 1
+######### Using Hist len 25 #########
+@@@@@@@@@ Using PEARL Envs @@@@@@@@@
+----------------------------
+Saving a checkpoint for iteration 0 in ./ck/safelife-dir_mql_dummy.pt
+Eval uses unbounded_eval_hist of length:  200
+---------------------------------------
+Evaluation over 4 episodes of 1 tasks in episode num 0 and nupdates 0: 0.000000
+---------------------------------------
+Start burnining for at least 10000
+obs shape (3375,)
+obs size 3648
+obs hist size 624
+self.replay_buffer size 440
+self.tasks_buffer size 888
+new obs size 3648
+reward size 48
+self.replay_buffer size 684152
+self.tasks_buffer size 684600
+new obs size 3648
+reward size 48
+self.replay_buffer size 1367672
+self.tasks_buffer size 1368120
+new obs size 3648
+reward size 48
+self.replay_buffer size 2051192
+self.tasks_buffer size 2051640
+new obs size 3648
+reward size 48
+self.replay_buffer size 2734712
+self.tasks_buffer size 2735160
+new obs size 3648
+reward size 48
+self.replay_buffer size 3418264
+self.tasks_buffer size 3418712
+new obs size 3648
+reward size 48
+self.replay_buffer size 4101784
+self.tasks_buffer size 4102232
+new obs size 3648
+reward size 48
+self.replay_buffer size 4785304
+self.tasks_buffer size 4785752
+new obs size 3648
+reward size 48
+self.replay_buffer size 5468824
+self.tasks_buffer size 5469272
+new obs size 3648
+reward size 48
+self.replay_buffer size 6152408
+self.tasks_buffer size 6152856
+new obs size 3648
+reward size 48
+self.replay_buffer size 6835928
+self.tasks_buffer size 6836376
+new obs size 3648
+reward size 48
+self.replay_buffer size 7519448
+self.tasks_buffer size 7519896
+new obs size 3648
+reward size 48
+self.replay_buffer size 8202968
+self.tasks_buffer size 8203416
+new obs size 3648
+reward size 48
+self.replay_buffer size 8886488
+self.tasks_buffer size 8886936
+new obs size 3648
+reward size 48
+self.replay_buffer size 9570008
+self.tasks_buffer size 9570456
+new obs size 3648
+reward size 48
+self.replay_buffer size 10253528
+self.tasks_buffer size 10253976
+new obs size 3648
+reward size 48
+self.replay_buffer size 10937048
+self.tasks_buffer size 10937496
+new obs size 3648
+reward size 48
+self.replay_buffer size 11620640
+self.tasks_buffer size 11621088
+new obs size 3648
+reward size 48
+self.replay_buffer size 12304160
+self.tasks_buffer size 12304608
+new obs size 3648
+reward size 48
+self.replay_buffer size 12987680
+self.tasks_buffer size 12988128
+new obs size 3648
+reward size 48
+self.replay_buffer size 13671200
+self.tasks_buffer size 13671648
+new obs size 3648
+reward size 48
+self.replay_buffer size 14354720
+self.tasks_buffer size 14355168
+new obs size 3648
+reward size 48
+self.replay_buffer size 15038240
+self.tasks_buffer size 15038688
+new obs size 3648
+reward size 48
+self.replay_buffer size 15721760
+self.tasks_buffer size 15722208
+new obs size 3648
+reward size 48
+self.replay_buffer size 16405280
+self.tasks_buffer size 16405728
+new obs size 3648
+reward size 48
+self.replay_buffer size 17088800
+self.tasks_buffer size 17089248
+new obs size 3648
+reward size 48
+self.replay_buffer size 17772400
+self.tasks_buffer size 17772848
+new obs size 3648
+reward size 48
+self.replay_buffer size 18455920
+self.tasks_buffer size 18456368
+new obs size 3648
+reward size 48
+self.replay_buffer size 19139440
+self.tasks_buffer size 19139888
+new obs size 3648
+reward size 48
+self.replay_buffer size 19822960
+self.tasks_buffer size 19823408
+new obs size 3648
+reward size 48
+self.replay_buffer size 20506480
+self.tasks_buffer size 20506928
+new obs size 3648
+reward size 48
+self.replay_buffer size 21190000
+self.tasks_buffer size 21190448
+new obs size 3648
+reward size 48
+self.replay_buffer size 21873520
+self.tasks_buffer size 21873968
+new obs size 3648
+reward size 48
+self.replay_buffer size 22557040
+self.tasks_buffer size 22557488
+new obs size 3648
+reward size 48
+self.replay_buffer size 23240560
+self.tasks_buffer size 23241008
+new obs size 3648
+reward size 48
+self.replay_buffer size 23924080
+self.tasks_buffer size 23924528
+new obs size 3648
+reward size 48
+self.replay_buffer size 24607688
+self.tasks_buffer size 24608136
+new obs size 3648
+reward size 48
+self.replay_buffer size 25291208
+self.tasks_buffer size 25291656
+new obs size 3648
+reward size 48
+self.replay_buffer size 25974728
+self.tasks_buffer size 25975176
+new obs size 3648
+reward size 48
+self.replay_buffer size 26658248
+self.tasks_buffer size 26658696
+new obs size 3648
+reward size 48
+self.replay_buffer size 27341768
+self.tasks_buffer size 27342216
+new obs size 3648
+reward size 48
+self.replay_buffer size 28025288
+self.tasks_buffer size 28025736
+new obs size 3648
+reward size 48
+self.replay_buffer size 28708808
+self.tasks_buffer size 28709256
+new obs size 3648
+reward size 48
+self.replay_buffer size 29392328
+self.tasks_buffer size 29392776
+new obs size 3648
+reward size 48
+self.replay_buffer size 30075848
+self.tasks_buffer size 30076296
+new obs size 3648
+reward size 48
+self.replay_buffer size 30759368
+self.tasks_buffer size 30759816
+new obs size 3648
+reward size 48
+self.replay_buffer size 31442888
+self.tasks_buffer size 31443336
+new obs size 3648
+reward size 48
+self.replay_buffer size 32126504
+self.tasks_buffer size 32126952
+new obs size 3648
+reward size 48
+self.replay_buffer size 32810024
+self.tasks_buffer size 32810472
+new obs size 3648
+reward size 48
+self.replay_buffer size 33493544
+self.tasks_buffer size 33493992
+new obs size 3648
+reward size 48
+Filename: /home/adrian/studium/master/sem3/rl_project/misc/runner_multi_snapshot.py
+
+Line #    Mem usage    Increment  Occurrences   Line Contents
+=============================================================
+    39    405.0 MiB    405.0 MiB           1       @profile
+    40                                             def run(self, update_iter, keep_burning = False, task_id = None, early_leave = 200):
+    41                                                 '''
+    42                                                     This function add transition to replay buffer.
+    43                                                     Early_leave is used in just cold start to collect more data from various tasks,
+    44                                                     rather than focus on just few ones
+    45                                                 '''
+    46    405.0 MiB      0.0 MiB           1           obs = self.env.reset()
+    47    405.0 MiB      0.0 MiB           1           print("obs shape", obs.shape)
+    48    405.0 MiB      0.0 MiB           1           print("obs size", asizeof.asizeof(obs))
+    49    405.0 MiB      0.0 MiB           1           done = False
+    50    405.0 MiB      0.0 MiB           1           episode_timesteps = 0
+    51    405.0 MiB      0.0 MiB           1           episode_reward = 0
+    52    405.0 MiB      0.0 MiB           1           uiter = 0
+    53    405.0 MiB      0.0 MiB           1           reward_epinfos = []
+    54                                         
+    55                                                 ########
+    56                                                 ## create a queue to keep track of past rewards and actions
+    57                                                 ########
+    58    405.0 MiB      0.0 MiB           1           rewards_hist = deque(maxlen=self.hist_len)
+    59    405.0 MiB      0.0 MiB           1           actions_hist = deque(maxlen=self.hist_len)
+    60    405.0 MiB      0.0 MiB           1           obsvs_hist   = deque(maxlen=self.hist_len)
+    61                                         
+    62    405.0 MiB      0.0 MiB           1           next_hrews = deque(maxlen=self.hist_len)
+    63    405.0 MiB      0.0 MiB           1           next_hacts = deque(maxlen=self.hist_len)
+    64    405.0 MiB      0.0 MiB           1           next_hobvs = deque(maxlen=self.hist_len)
+    65                                         
+    66                                                 # Given batching schema, I need to build a full seq to keep in replay buffer
+    67                                                 # Add to all zeros.
+    68    405.0 MiB      0.0 MiB           1           zero_action = np.zeros(self.env.action_space.shape[0])
+    69    405.0 MiB      0.0 MiB           1           zero_obs    = np.zeros(obs.shape)
+    70    405.4 MiB      0.0 MiB          26           for _ in range(self.hist_len):
+    71    405.4 MiB      0.0 MiB          25               rewards_hist.append(0)
+    72    405.4 MiB      0.0 MiB          25               actions_hist.append(zero_action.copy())
+    73    405.4 MiB      0.0 MiB          25               obsvs_hist.append(zero_obs.copy())
+    74                                         
+    75                                                     # same thing for next_h*
+    76    405.4 MiB      0.0 MiB          25               next_hrews.append(0)
+    77    405.4 MiB      0.0 MiB          25               next_hacts.append(zero_action.copy())
+    78    405.4 MiB      0.4 MiB          25               next_hobvs.append(zero_obs.copy())
+    79                                         
+    80                                                 # now add obs to the seq
+    81    405.4 MiB      0.0 MiB           1           rand_acttion = np.random.normal(0, self.expl_noise, size=self.env.action_space.shape[0])
+    82    405.4 MiB      0.0 MiB           1           rand_acttion = rand_acttion.clip(self.env.action_space.low, self.env.action_space.high)
+    83    405.4 MiB      0.0 MiB           1           rewards_hist.append(0)
+    84    405.4 MiB      0.0 MiB           1           actions_hist.append(rand_acttion.copy())
+    85    405.4 MiB      0.0 MiB           1           obsvs_hist.append(obs.copy())
+    86                                         
+    87    405.4 MiB      0.0 MiB           1           print("obs hist size", asizeof.asizeof(obsvs_hist))
+    88                                         
+    89                                                 ######
+    90                                                 # Start collecting data
+    91                                                 #####
+    92    437.7 MiB      0.0 MiB          51           while not done and uiter < np.minimum(self.max_path_length, early_leave):
+    93                                         
+    94    437.0 MiB      0.8 MiB          50               print("self.replay_buffer size", asizeof.asizeof(self.replay_buffer))
+    95    437.0 MiB      0.0 MiB          50               print("self.tasks_buffer size", asizeof.asizeof(self.tasks_buffer))
+    96                                         
+    97                                                     #####
+    98                                                     # Convert actions_hist, rewards_hist to np.array and flatten them out
+    99                                                     # for example: hist =7, actin_dim = 11 --> np.asarray(actions_hist(7, 11)) ==> flatten ==> (77,)
+   100    437.0 MiB      0.0 MiB          50               np_pre_actions = np.asarray(actions_hist, dtype=np.float32).flatten()  #(hist, action_dim) => (hist *action_dim,)
+   101    437.0 MiB      0.0 MiB          50               np_pre_rewards = np.asarray(rewards_hist, dtype=np.float32) #(hist, )
+   102    437.3 MiB     15.0 MiB          50               np_pre_obsers = np.asarray(obsvs_hist, dtype=np.float32).flatten()  #(hist, action_dim) => (hist *action_dim,)
+   103                                         
+   104                                                     # Select action randomly or according to policy
+   105    437.3 MiB      0.0 MiB          50               if keep_burning or update_iter < self.burn_in:
+   106    437.3 MiB      0.1 MiB          50                   action = self.env.action_space.sample()
+   107                                         
+   108                                                     else:
+   109                                                         # select_action take into account previous action to take into account
+   110                                                         # previous action in selecting a new action
+   111                                                         action = self.model.select_action(np.array(obs), np.array(np_pre_actions), np.array(np_pre_rewards), np.array(np_pre_obsers))
+   112                                         
+   113                                                         if self.expl_noise != 0: 
+   114                                                             action = action + np.random.normal(0, self.expl_noise, size=self.env.action_space.shape[0])
+   115                                                             action = action.clip(self.env.action_space.low, self.env.action_space.high)
+   116                                         
+   117                                                     # Perform action
+   118    437.3 MiB      0.0 MiB          50               new_obs, reward, done, _ = self.env.step(action) 
+   119    437.3 MiB      0.0 MiB          50               print("new obs size", asizeof.asizeof(new_obs))
+   120    437.3 MiB      0.0 MiB          50               print("reward size", asizeof.asizeof(reward))
+   121                                         
+   122    437.3 MiB      0.0 MiB          50               if episode_timesteps + 1 == self.max_path_length:
+   123                                                         done_bool = 0
+   124                                         
+   125                                                     else:
+   126    437.3 MiB      0.0 MiB          50                   done_bool = float(done)
+   127                                         
+   128    437.3 MiB      0.0 MiB          50               episode_reward += reward
+   129    437.3 MiB      0.0 MiB          50               reward_epinfos.append(reward)
+   130                                         
+   131                                                     ###############
+   132    437.3 MiB      0.0 MiB          50               next_hrews.append(reward)
+   133    437.3 MiB      0.0 MiB          50               next_hacts.append(action.copy())
+   134    437.3 MiB      0.0 MiB          50               next_hobvs.append(obs.copy())
+   135                                         
+   136                                                     # np_next_hacts and np_next_hrews are required for TD3 alg
+   137    437.3 MiB      0.0 MiB          50               np_next_hacts = np.asarray(next_hacts, dtype=np.float32).flatten()  #(hist, action_dim) => (hist *action_dim,)
+   138    437.3 MiB      0.0 MiB          50               np_next_hrews = np.asarray(next_hrews, dtype=np.float32) #(hist, )
+   139    437.7 MiB     16.4 MiB          50               np_next_hobvs = np.asarray(next_hobvs, dtype=np.float32).flatten() #(hist, )
+   140                                         
+   141                                                     # Store data in replay buffer
+   142    437.7 MiB      0.0 MiB         100               self.replay_buffer.add((obs, new_obs, action, reward, done_bool,
+   143    437.7 MiB      0.0 MiB          50                                       np_pre_actions, np_pre_rewards, np_pre_obsers,
+   144    437.7 MiB      0.0 MiB          50                                       np_next_hacts, np_next_hrews, np_next_hobvs))
+   145                                         
+   146                                                     # This is snapshot buffer which has short memeory
+   147    437.7 MiB      0.0 MiB         100               self.tasks_buffer.add(task_id, (obs, new_obs, action, reward, done_bool,
+   148    437.7 MiB      0.0 MiB          50                                       np_pre_actions, np_pre_rewards, np_pre_obsers,
+   149    437.7 MiB      0.0 MiB          50                                       np_next_hacts, np_next_hrews, np_next_hobvs))
+   150                                         
+   151                                                     # new becomes old
+   152    437.7 MiB      0.0 MiB          50               rewards_hist.append(reward)
+   153    437.7 MiB      0.0 MiB          50               actions_hist.append(action.copy())
+   154    437.7 MiB      0.0 MiB          50               obsvs_hist.append(obs.copy())
+   155                                         
+   156    437.7 MiB      0.0 MiB          50               obs = new_obs.copy()
+   157    437.7 MiB      0.0 MiB          50               episode_timesteps += 1
+   158    437.7 MiB      0.0 MiB          50               update_iter += 1
+   159    437.7 MiB      0.0 MiB          50               uiter += 1
+   160                                         
+   161    437.7 MiB      0.0 MiB           1           info = {}
+   162    437.7 MiB      0.0 MiB           1           info['episode_timesteps'] = episode_timesteps
+   163    437.7 MiB      0.0 MiB           1           info['update_iter'] = update_iter
+   164    437.7 MiB      0.0 MiB           1           info['episode_reward'] = episode_reward
+   165    437.7 MiB      0.0 MiB           1           info['epinfos'] = [{"r": round(sum(reward_epinfos), 6), "l": len(reward_epinfos)}]
+   166                                         
+   167    437.7 MiB      0.0 MiB           1           return info
+
+
+-----------------
+function                      44188    +44188
+tuple                         28720    +28720
+dict                          28070    +28070
+cell                          10657    +10657
+list                          10607    +10607
+getset_descriptor             10575    +10575
+weakref                       10461    +10461
+builtin_function_or_method     7633     +7633
+type                           6843     +6843
+method_descriptor              5822     +5822
+env size 106664
+rollouts size 34540224
+args size 8768
+epinfobuf size 624
+epinfobuf2 size 624
+:::::::::::::::::::::::
+leaking objects size:  4543
+obs shape (3375,)
+obs size 3648
+obs hist size 624
+self.replay_buffer size 34177064
+self.tasks_buffer size 34177512
+new obs size 3648
+reward size 48
+self.replay_buffer size 34860728
+self.tasks_buffer size 34861176
+new obs size 3648
+reward size 48
+self.replay_buffer size 35544248
+self.tasks_buffer size 35544696
+new obs size 3648
+reward size 48
+self.replay_buffer size 36227768
+self.tasks_buffer size 36228216
+new obs size 3648
+reward size 48
+self.replay_buffer size 36911288
+self.tasks_buffer size 36911736
+new obs size 3648
+reward size 48
+self.replay_buffer size 37594808
+self.tasks_buffer size 37595256
+new obs size 3648
+reward size 48
+self.replay_buffer size 38278328
+self.tasks_buffer size 38278776
+new obs size 3648
+reward size 48
+self.replay_buffer size 38961848
+self.tasks_buffer size 38962296
+new obs size 3648
+reward size 48
+self.replay_buffer size 39645368
+self.tasks_buffer size 39645816
+new obs size 3648
+reward size 48
+self.replay_buffer size 40329000
+self.tasks_buffer size 40329448
+new obs size 3648
+reward size 48
+self.replay_buffer size 41012520
+self.tasks_buffer size 41012968
+new obs size 3648
+reward size 48
+self.replay_buffer size 41696040
+self.tasks_buffer size 41696488
+new obs size 3648
+reward size 48
+self.replay_buffer size 42379560
+self.tasks_buffer size 42380008
+new obs size 3648
+reward size 48
+self.replay_buffer size 43063080
+self.tasks_buffer size 43063528
+new obs size 3648
+reward size 48
+self.replay_buffer size 43746600
+self.tasks_buffer size 43747048
+new obs size 3648
+reward size 48
+self.replay_buffer size 44430120
+self.tasks_buffer size 44430568
+new obs size 3648
+reward size 48
+self.replay_buffer size 45113640
+self.tasks_buffer size 45114088
+new obs size 3648
+reward size 48
+self.replay_buffer size 45797160
+self.tasks_buffer size 45797608
+new obs size 3648
+reward size 48
+self.replay_buffer size 46480680
+self.tasks_buffer size 46481128
+new obs size 3648
+reward size 48
+self.replay_buffer size 47164200
+self.tasks_buffer size 47164648
+new obs size 3648
+reward size 48
+self.replay_buffer size 47847720
+self.tasks_buffer size 47848168
+new obs size 3648
+reward size 48
+self.replay_buffer size 48531240
+self.tasks_buffer size 48531688
+new obs size 3648
+reward size 48
+self.replay_buffer size 49214760
+self.tasks_buffer size 49215208
+new obs size 3648
+reward size 48
+self.replay_buffer size 49898408
+self.tasks_buffer size 49898856
+new obs size 3648
+reward size 48
+self.replay_buffer size 50581928
+self.tasks_buffer size 50582376
+new obs size 3648
+reward size 48
+self.replay_buffer size 51265448
+self.tasks_buffer size 51265896
+new obs size 3648
+reward size 48
+self.replay_buffer size 51948968
+self.tasks_buffer size 51949416
+new obs size 3648
+reward size 48
+self.replay_buffer size 52632488
+self.tasks_buffer size 52632936
+new obs size 3648
+reward size 48
+self.replay_buffer size 53316008
+self.tasks_buffer size 53316456
+new obs size 3648
+reward size 48
+self.replay_buffer size 53999528
+self.tasks_buffer size 53999976
+new obs size 3648
+reward size 48
+self.replay_buffer size 54683048
+self.tasks_buffer size 54683496
+new obs size 3648
+reward size 48
+self.replay_buffer size 55366568
+self.tasks_buffer size 55367016
+new obs size 3648
+reward size 48
+self.replay_buffer size 56050088
+self.tasks_buffer size 56050536
+new obs size 3648
+reward size 48
+self.replay_buffer size 56733608
+self.tasks_buffer size 56734056
+new obs size 3648
+reward size 48
+self.replay_buffer size 57417128
+self.tasks_buffer size 57417576
+new obs size 3648
+reward size 48
+self.replay_buffer size 58100648
+self.tasks_buffer size 58101096
+new obs size 3648
+reward size 48
+self.replay_buffer size 58784168
+self.tasks_buffer size 58784616
+new obs size 3648
+reward size 48
+self.replay_buffer size 59467688
+self.tasks_buffer size 59468136
+new obs size 3648
+reward size 48
+self.replay_buffer size 60151208
+self.tasks_buffer size 60151656
+new obs size 3648
+reward size 48
+self.replay_buffer size 60834872
+self.tasks_buffer size 60835320
+new obs size 3648
+reward size 48
+self.replay_buffer size 61518392
+self.tasks_buffer size 61518840
+new obs size 3648
+reward size 48
+self.replay_buffer size 62201912
+self.tasks_buffer size 62202360
+new obs size 3648
+reward size 48
+self.replay_buffer size 62885432
+self.tasks_buffer size 62885880
+new obs size 3648
+reward size 48
+self.replay_buffer size 63568952
+self.tasks_buffer size 63569400
+new obs size 3648
+reward size 48
+self.replay_buffer size 64252472
+self.tasks_buffer size 64252920
+new obs size 3648
+reward size 48
+self.replay_buffer size 64935992
+self.tasks_buffer size 64936440
+new obs size 3648
+reward size 48
+self.replay_buffer size 65619512
+self.tasks_buffer size 65619960
+new obs size 3648
+reward size 48
+self.replay_buffer size 66303032
+self.tasks_buffer size 66303480
+new obs size 3648
+reward size 48
+self.replay_buffer size 66986552
+self.tasks_buffer size 66987000
+new obs size 3648
+reward size 48
+self.replay_buffer size 67670072
+self.tasks_buffer size 67670520
+new obs size 3648
+reward size 48
+Filename: /home/adrian/studium/master/sem3/rl_project/misc/runner_multi_snapshot.py
+
+Line #    Mem usage    Increment  Occurrences   Line Contents
+=============================================================
+    39    444.5 MiB    444.5 MiB           1       @profile
+    40                                             def run(self, update_iter, keep_burning = False, task_id = None, early_leave = 200):
+    41                                                 '''
+    42                                                     This function add transition to replay buffer.
+    43                                                     Early_leave is used in just cold start to collect more data from various tasks,
+    44                                                     rather than focus on just few ones
+    45                                                 '''
+    46    444.5 MiB      0.0 MiB           1           obs = self.env.reset()
+    47    444.5 MiB      0.0 MiB           1           print("obs shape", obs.shape)
+    48    444.5 MiB      0.0 MiB           1           print("obs size", asizeof.asizeof(obs))
+    49    444.5 MiB      0.0 MiB           1           done = False
+    50    444.5 MiB      0.0 MiB           1           episode_timesteps = 0
+    51    444.5 MiB      0.0 MiB           1           episode_reward = 0
+    52    444.5 MiB      0.0 MiB           1           uiter = 0
+    53    444.5 MiB      0.0 MiB           1           reward_epinfos = []
+    54                                         
+    55                                                 ########
+    56                                                 ## create a queue to keep track of past rewards and actions
+    57                                                 ########
+    58    444.5 MiB      0.0 MiB           1           rewards_hist = deque(maxlen=self.hist_len)
+    59    444.5 MiB      0.0 MiB           1           actions_hist = deque(maxlen=self.hist_len)
+    60    444.5 MiB      0.0 MiB           1           obsvs_hist   = deque(maxlen=self.hist_len)
+    61                                         
+    62    444.5 MiB      0.0 MiB           1           next_hrews = deque(maxlen=self.hist_len)
+    63    444.5 MiB      0.0 MiB           1           next_hacts = deque(maxlen=self.hist_len)
+    64    444.5 MiB      0.0 MiB           1           next_hobvs = deque(maxlen=self.hist_len)
+    65                                         
+    66                                                 # Given batching schema, I need to build a full seq to keep in replay buffer
+    67                                                 # Add to all zeros.
+    68    444.5 MiB      0.0 MiB           1           zero_action = np.zeros(self.env.action_space.shape[0])
+    69    444.5 MiB      0.0 MiB           1           zero_obs    = np.zeros(obs.shape)
+    70    444.5 MiB      0.0 MiB          26           for _ in range(self.hist_len):
+    71    444.5 MiB      0.0 MiB          25               rewards_hist.append(0)
+    72    444.5 MiB      0.0 MiB          25               actions_hist.append(zero_action.copy())
+    73    444.5 MiB      0.0 MiB          25               obsvs_hist.append(zero_obs.copy())
+    74                                         
+    75                                                     # same thing for next_h*
+    76    444.5 MiB      0.0 MiB          25               next_hrews.append(0)
+    77    444.5 MiB      0.0 MiB          25               next_hacts.append(zero_action.copy())
+    78    444.5 MiB      0.0 MiB          25               next_hobvs.append(zero_obs.copy())
+    79                                         
+    80                                                 # now add obs to the seq
+    81    444.5 MiB      0.0 MiB           1           rand_acttion = np.random.normal(0, self.expl_noise, size=self.env.action_space.shape[0])
+    82    444.5 MiB      0.0 MiB           1           rand_acttion = rand_acttion.clip(self.env.action_space.low, self.env.action_space.high)
+    83    444.5 MiB      0.0 MiB           1           rewards_hist.append(0)
+    84    444.5 MiB      0.0 MiB           1           actions_hist.append(rand_acttion.copy())
+    85    444.5 MiB      0.0 MiB           1           obsvs_hist.append(obs.copy())
+    86                                         
+    87    444.5 MiB      0.0 MiB           1           print("obs hist size", asizeof.asizeof(obsvs_hist))
+    88                                         
+    89                                                 ######
+    90                                                 # Start collecting data
+    91                                                 #####
+    92    470.0 MiB      0.0 MiB          51           while not done and uiter < np.minimum(self.max_path_length, early_leave):
+    93                                         
+    94    469.3 MiB      0.0 MiB          50               print("self.replay_buffer size", asizeof.asizeof(self.replay_buffer))
+    95    469.3 MiB      0.0 MiB          50               print("self.tasks_buffer size", asizeof.asizeof(self.tasks_buffer))
+    96                                         
+    97                                                     #####
+    98                                                     # Convert actions_hist, rewards_hist to np.array and flatten them out
+    99                                                     # for example: hist =7, actin_dim = 11 --> np.asarray(actions_hist(7, 11)) ==> flatten ==> (77,)
+   100    469.3 MiB      0.0 MiB          50               np_pre_actions = np.asarray(actions_hist, dtype=np.float32).flatten()  #(hist, action_dim) => (hist *action_dim,)
+   101    469.3 MiB      0.0 MiB          50               np_pre_rewards = np.asarray(rewards_hist, dtype=np.float32) #(hist, )
+   102    469.8 MiB     12.6 MiB          50               np_pre_obsers = np.asarray(obsvs_hist, dtype=np.float32).flatten()  #(hist, action_dim) => (hist *action_dim,)
+   103                                         
+   104                                                     # Select action randomly or according to policy
+   105    469.8 MiB      0.0 MiB          50               if keep_burning or update_iter < self.burn_in:
+   106    469.8 MiB      0.0 MiB          50                   action = self.env.action_space.sample()
+   107                                         
+   108                                                     else:
+   109                                                         # select_action take into account previous action to take into account
+   110                                                         # previous action in selecting a new action
+   111                                                         action = self.model.select_action(np.array(obs), np.array(np_pre_actions), np.array(np_pre_rewards), np.array(np_pre_obsers))
+   112                                         
+   113                                                         if self.expl_noise != 0: 
+   114                                                             action = action + np.random.normal(0, self.expl_noise, size=self.env.action_space.shape[0])
+   115                                                             action = action.clip(self.env.action_space.low, self.env.action_space.high)
+   116                                         
+   117                                                     # Perform action
+   118    469.8 MiB      0.0 MiB          50               new_obs, reward, done, _ = self.env.step(action) 
+   119    469.8 MiB      0.0 MiB          50               print("new obs size", asizeof.asizeof(new_obs))
+   120    469.8 MiB      0.0 MiB          50               print("reward size", asizeof.asizeof(reward))
+   121                                         
+   122    469.8 MiB      0.0 MiB          50               if episode_timesteps + 1 == self.max_path_length:
+   123                                                         done_bool = 0
+   124                                         
+   125                                                     else:
+   126    469.8 MiB      0.0 MiB          50                   done_bool = float(done)
+   127                                         
+   128    469.8 MiB      0.0 MiB          50               episode_reward += reward
+   129    469.8 MiB      0.0 MiB          50               reward_epinfos.append(reward)
+   130                                         
+   131                                                     ###############
+   132    469.8 MiB      0.0 MiB          50               next_hrews.append(reward)
+   133    469.8 MiB      0.0 MiB          50               next_hacts.append(action.copy())
+   134    469.8 MiB      0.0 MiB          50               next_hobvs.append(obs.copy())
+   135                                         
+   136                                                     # np_next_hacts and np_next_hrews are required for TD3 alg
+   137    469.8 MiB      0.0 MiB          50               np_next_hacts = np.asarray(next_hacts, dtype=np.float32).flatten()  #(hist, action_dim) => (hist *action_dim,)
+   138    469.8 MiB      0.0 MiB          50               np_next_hrews = np.asarray(next_hrews, dtype=np.float32) #(hist, )
+   139    470.0 MiB     12.9 MiB          50               np_next_hobvs = np.asarray(next_hobvs, dtype=np.float32).flatten() #(hist, )
+   140                                         
+   141                                                     # Store data in replay buffer
+   142    470.0 MiB      0.0 MiB         100               self.replay_buffer.add((obs, new_obs, action, reward, done_bool,
+   143    470.0 MiB      0.0 MiB          50                                       np_pre_actions, np_pre_rewards, np_pre_obsers,
+   144    470.0 MiB      0.0 MiB          50                                       np_next_hacts, np_next_hrews, np_next_hobvs))
+   145                                         
+   146                                                     # This is snapshot buffer which has short memeory
+   147    470.0 MiB      0.0 MiB         100               self.tasks_buffer.add(task_id, (obs, new_obs, action, reward, done_bool,
+   148    470.0 MiB      0.0 MiB          50                                       np_pre_actions, np_pre_rewards, np_pre_obsers,
+   149    470.0 MiB      0.0 MiB          50                                       np_next_hacts, np_next_hrews, np_next_hobvs))
+   150                                         
+   151                                                     # new becomes old
+   152    470.0 MiB      0.0 MiB          50               rewards_hist.append(reward)
+   153    470.0 MiB      0.0 MiB          50               actions_hist.append(action.copy())
+   154    470.0 MiB      0.0 MiB          50               obsvs_hist.append(obs.copy())
+   155                                         
+   156    470.0 MiB      0.0 MiB          50               obs = new_obs.copy()
+   157    470.0 MiB      0.0 MiB          50               episode_timesteps += 1
+   158    470.0 MiB      0.0 MiB          50               update_iter += 1
+   159    470.0 MiB      0.0 MiB          50               uiter += 1
+   160                                         
+   161    470.0 MiB      0.0 MiB           1           info = {}
+   162    470.0 MiB      0.0 MiB           1           info['episode_timesteps'] = episode_timesteps
+   163    470.0 MiB      0.0 MiB           1           info['update_iter'] = update_iter
+   164    470.0 MiB      0.0 MiB           1           info['episode_reward'] = episode_reward
+   165    470.0 MiB      0.0 MiB           1           info['epinfos'] = [{"r": round(sum(reward_epinfos), 6), "l": len(reward_epinfos)}]
+   166                                         
+   167    470.0 MiB      0.0 MiB           1           return info
+
+
+-----------------
+_Typedef      200       +89
+_Claskey       93       +38
+env size 106408
+rollouts size 68723280
+args size 8768
+epinfobuf size 624
+epinfobuf2 size 624
+:::::::::::::::::::::::
+leaking objects size:  4543
+obs shape (3375,)
+obs size 3648
+obs hist size 624
+self.replay_buffer size 68353592
+self.tasks_buffer size 68354040
+new obs size 3648
+reward size 48
+self.replay_buffer size 69037256
+self.tasks_buffer size 69037704
+new obs size 3648
+reward size 48
+self.replay_buffer size 69720776
+self.tasks_buffer size 69721224
+new obs size 3648
+reward size 48
+self.replay_buffer size 70404296
+self.tasks_buffer size 70404744
+new obs size 3648
+reward size 48
+self.replay_buffer size 71087816
+self.tasks_buffer size 71088264
+new obs size 3648
+reward size 48
+self.replay_buffer size 71771336
+self.tasks_buffer size 71771784
+new obs size 3648
+reward size 48
+self.replay_buffer size 72454856
+self.tasks_buffer size 72455304
+new obs size 3648
+reward size 48
+self.replay_buffer size 73138536
+self.tasks_buffer size 73138984
+new obs size 3648
+reward size 48
+self.replay_buffer size 73822056
+self.tasks_buffer size 73822504
+new obs size 3648
+reward size 48
+self.replay_buffer size 74505576
+self.tasks_buffer size 74506024
+new obs size 3648
+reward size 48
+self.replay_buffer size 75189096
+self.tasks_buffer size 75189544
+new obs size 3648
+reward size 48
+self.replay_buffer size 75872616
+self.tasks_buffer size 75873064
+new obs size 3648
+reward size 48
+self.replay_buffer size 76556136
+self.tasks_buffer size 76556584
+new obs size 3648
+reward size 48
+self.replay_buffer size 77239656
+self.tasks_buffer size 77240104
+new obs size 3648
+reward size 48
+self.replay_buffer size 77923176
+self.tasks_buffer size 77923624
+new obs size 3648
+reward size 48
+self.replay_buffer size 78606696
+self.tasks_buffer size 78607144
+new obs size 3648
+reward size 48
+self.replay_buffer size 79290216
+self.tasks_buffer size 79290664
+new obs size 3648
+reward size 48
+self.replay_buffer size 79973736
+self.tasks_buffer size 79974184
+new obs size 3648
+reward size 48
+self.replay_buffer size 80657256
+self.tasks_buffer size 80657704
+new obs size 3648
+reward size 48
+self.replay_buffer size 81340776
+self.tasks_buffer size 81341224
+new obs size 3648
+reward size 48
+self.replay_buffer size 82024296
+self.tasks_buffer size 82024744
+new obs size 3648
+reward size 48
+self.replay_buffer size 82707816
+self.tasks_buffer size 82708264
+new obs size 3648
+reward size 48
+self.replay_buffer size 83391336
+self.tasks_buffer size 83391784
+new obs size 3648
+reward size 48
+self.replay_buffer size 84074856
+self.tasks_buffer size 84075304
+new obs size 3648
+reward size 48
+self.replay_buffer size 84758376
+self.tasks_buffer size 84758824
+new obs size 3648
+reward size 48
+self.replay_buffer size 85441896
+self.tasks_buffer size 85442344
+new obs size 3648
+reward size 48
+self.replay_buffer size 86125416
+self.tasks_buffer size 86125864
+new obs size 3648
+reward size 48
+self.replay_buffer size 86809112
+self.tasks_buffer size 86809560
+new obs size 3648
+reward size 48
+self.replay_buffer size 87492632
+self.tasks_buffer size 87493080
+new obs size 3648
+reward size 48
+self.replay_buffer size 88176152
+self.tasks_buffer size 88176600
+new obs size 3648
+reward size 48
+self.replay_buffer size 88859672
+self.tasks_buffer size 88860120
+new obs size 3648
+reward size 48
+self.replay_buffer size 89543192
+self.tasks_buffer size 89543640
+new obs size 3648
+reward size 48
+self.replay_buffer size 90226712
+self.tasks_buffer size 90227160
+new obs size 3648
+reward size 48
+self.replay_buffer size 90910232
+self.tasks_buffer size 90910680
+new obs size 3648
+reward size 48
+self.replay_buffer size 91593752
+self.tasks_buffer size 91594200
+new obs size 3648
+reward size 48
+self.replay_buffer size 92277272
+self.tasks_buffer size 92277720
+new obs size 3648
+reward size 48
+self.replay_buffer size 92960792
+self.tasks_buffer size 92961240
+new obs size 3648
+reward size 48
+self.replay_buffer size 93644312
+self.tasks_buffer size 93644760
+new obs size 3648
+reward size 48
+self.replay_buffer size 94327832
+self.tasks_buffer size 94328280
+new obs size 3648
+reward size 48
+self.replay_buffer size 95011352
+self.tasks_buffer size 95011800
+new obs size 3648
+reward size 48
+self.replay_buffer size 95694872
+self.tasks_buffer size 95695320
+new obs size 3648
+reward size 48
+self.replay_buffer size 96378392
+self.tasks_buffer size 96378840
+new obs size 3648
+reward size 48
+self.replay_buffer size 97061912
+self.tasks_buffer size 97062360
+new obs size 3648
+reward size 48
+self.replay_buffer size 97745432
+self.tasks_buffer size 97745880
+new obs size 3648
+reward size 48
+self.replay_buffer size 98428952
+self.tasks_buffer size 98429400
+new obs size 3648
+reward size 48
+self.replay_buffer size 99112472
+self.tasks_buffer size 99112920
+new obs size 3648
+reward size 48
+self.replay_buffer size 99795992
+self.tasks_buffer size 99796440
+new obs size 3648
+reward size 48
+self.replay_buffer size 100479512
+self.tasks_buffer size 100479960
+new obs size 3648
+reward size 48
+self.replay_buffer size 101163032
+self.tasks_buffer size 101163480
+new obs size 3648
+reward size 48
+self.replay_buffer size 101846752
+self.tasks_buffer size 101847200
+new obs size 3648
+reward size 48
+Filename: /home/adrian/studium/master/sem3/rl_project/misc/runner_multi_snapshot.py
+
+Line #    Mem usage    Increment  Occurrences   Line Contents
+=============================================================
+    39    470.3 MiB    470.3 MiB           1       @profile
+    40                                             def run(self, update_iter, keep_burning = False, task_id = None, early_leave = 200):
+    41                                                 '''
+    42                                                     This function add transition to replay buffer.
+    43                                                     Early_leave is used in just cold start to collect more data from various tasks,
+    44                                                     rather than focus on just few ones
+    45                                                 '''
+    46    470.3 MiB      0.0 MiB           1           obs = self.env.reset()
+    47    470.3 MiB      0.0 MiB           1           print("obs shape", obs.shape)
+    48    470.3 MiB      0.0 MiB           1           print("obs size", asizeof.asizeof(obs))
+    49    470.3 MiB      0.0 MiB           1           done = False
+    50    470.3 MiB      0.0 MiB           1           episode_timesteps = 0
+    51    470.3 MiB      0.0 MiB           1           episode_reward = 0
+    52    470.3 MiB      0.0 MiB           1           uiter = 0
+    53    470.3 MiB      0.0 MiB           1           reward_epinfos = []
+    54                                         
+    55                                                 ########
+    56                                                 ## create a queue to keep track of past rewards and actions
+    57                                                 ########
+    58    470.3 MiB      0.0 MiB           1           rewards_hist = deque(maxlen=self.hist_len)
+    59    470.3 MiB      0.0 MiB           1           actions_hist = deque(maxlen=self.hist_len)
+    60    470.3 MiB      0.0 MiB           1           obsvs_hist   = deque(maxlen=self.hist_len)
+    61                                         
+    62    470.3 MiB      0.0 MiB           1           next_hrews = deque(maxlen=self.hist_len)
+    63    470.3 MiB      0.0 MiB           1           next_hacts = deque(maxlen=self.hist_len)
+    64    470.3 MiB      0.0 MiB           1           next_hobvs = deque(maxlen=self.hist_len)
+    65                                         
+    66                                                 # Given batching schema, I need to build a full seq to keep in replay buffer
+    67                                                 # Add to all zeros.
+    68    470.3 MiB      0.0 MiB           1           zero_action = np.zeros(self.env.action_space.shape[0])
+    69    470.3 MiB      0.0 MiB           1           zero_obs    = np.zeros(obs.shape)
+    70    470.3 MiB      0.0 MiB          26           for _ in range(self.hist_len):
+    71    470.3 MiB      0.0 MiB          25               rewards_hist.append(0)
+    72    470.3 MiB      0.0 MiB          25               actions_hist.append(zero_action.copy())
+    73    470.3 MiB      0.0 MiB          25               obsvs_hist.append(zero_obs.copy())
+    74                                         
+    75                                                     # same thing for next_h*
+    76    470.3 MiB      0.0 MiB          25               next_hrews.append(0)
+    77    470.3 MiB      0.0 MiB          25               next_hacts.append(zero_action.copy())
+    78    470.3 MiB      0.0 MiB          25               next_hobvs.append(zero_obs.copy())
+    79                                         
+    80                                                 # now add obs to the seq
+    81    470.3 MiB      0.0 MiB           1           rand_acttion = np.random.normal(0, self.expl_noise, size=self.env.action_space.shape[0])
+    82    470.3 MiB      0.0 MiB           1           rand_acttion = rand_acttion.clip(self.env.action_space.low, self.env.action_space.high)
+    83    470.3 MiB      0.0 MiB           1           rewards_hist.append(0)
+    84    470.3 MiB      0.0 MiB           1           actions_hist.append(rand_acttion.copy())
+    85    470.3 MiB      0.0 MiB           1           obsvs_hist.append(obs.copy())
+    86                                         
+    87    470.3 MiB      0.0 MiB           1           print("obs hist size", asizeof.asizeof(obsvs_hist))
+    88                                         
+    89                                                 ######
+    90                                                 # Start collecting data
+    91                                                 #####
+    92    502.5 MiB      0.0 MiB          51           while not done and uiter < np.minimum(self.max_path_length, early_leave):
+    93                                         
+    94    502.0 MiB      0.0 MiB          50               print("self.replay_buffer size", asizeof.asizeof(self.replay_buffer))
+    95    502.0 MiB      0.0 MiB          50               print("self.tasks_buffer size", asizeof.asizeof(self.tasks_buffer))
+    96                                         
+    97                                                     #####
+    98                                                     # Convert actions_hist, rewards_hist to np.array and flatten them out
+    99                                                     # for example: hist =7, actin_dim = 11 --> np.asarray(actions_hist(7, 11)) ==> flatten ==> (77,)
+   100    502.0 MiB      0.0 MiB          50               np_pre_actions = np.asarray(actions_hist, dtype=np.float32).flatten()  #(hist, action_dim) => (hist *action_dim,)
+   101    502.0 MiB      0.0 MiB          50               np_pre_rewards = np.asarray(rewards_hist, dtype=np.float32) #(hist, )
+   102    502.2 MiB     15.5 MiB          50               np_pre_obsers = np.asarray(obsvs_hist, dtype=np.float32).flatten()  #(hist, action_dim) => (hist *action_dim,)
+   103                                         
+   104                                                     # Select action randomly or according to policy
+   105    502.2 MiB      0.0 MiB          50               if keep_burning or update_iter < self.burn_in:
+   106    502.2 MiB      0.0 MiB          50                   action = self.env.action_space.sample()
+   107                                         
+   108                                                     else:
+   109                                                         # select_action take into account previous action to take into account
+   110                                                         # previous action in selecting a new action
+   111                                                         action = self.model.select_action(np.array(obs), np.array(np_pre_actions), np.array(np_pre_rewards), np.array(np_pre_obsers))
+   112                                         
+   113                                                         if self.expl_noise != 0: 
+   114                                                             action = action + np.random.normal(0, self.expl_noise, size=self.env.action_space.shape[0])
+   115                                                             action = action.clip(self.env.action_space.low, self.env.action_space.high)
+   116                                         
+   117                                                     # Perform action
+   118    502.2 MiB      0.0 MiB          50               new_obs, reward, done, _ = self.env.step(action) 
+   119    502.2 MiB      0.0 MiB          50               print("new obs size", asizeof.asizeof(new_obs))
+   120    502.2 MiB      0.0 MiB          50               print("reward size", asizeof.asizeof(reward))
+   121                                         

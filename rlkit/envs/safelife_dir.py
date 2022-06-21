@@ -1,4 +1,5 @@
 import warnings
+from memory_profiler import profile
 from types import SimpleNamespace
 
 import gym
@@ -11,7 +12,6 @@ from .safelife.file_finder import SafeLifeLevelIterator
 from .safelife.safelife_game import CellTypes
 from .safelife.helper_utils import recenter_view, load_kwargs
 from .safelife.random import set_rng
-
 
 @register_env('safelife-dir')
 class SafeLifeEnv(gym.Env):
@@ -155,7 +155,9 @@ class SafeLifeEnv(gym.Env):
             shift = np.array(list(self.output_channels), dtype=np.uint16)
             board = (board[...,None] & (1 << shift)) >> shift
             board = board.astype(np.uint8)
-        return board
+        flattened_shape = tuple([np.prod(board.shape)])
+        board_flattened = np.reshape(board, flattened_shape)
+        return board_flattened
 
     def step(self, action):
         assert self.game is not None, "Game state is not initialized."
@@ -213,9 +215,10 @@ class SafeLifeEnv(gym.Env):
         pass
 
     def get_all_task_idx(self):
-        return [0, 1]
+        return [0]
 
     def reset_task(self, tidx):
+        self.reset()
         return
 
     @classmethod

@@ -3,6 +3,8 @@ import numpy as np
 from gym import Env
 from gym.spaces import Box
 
+from memory_profiler import profile
+
 from rlkit.core.serializable import Serializable
 
 

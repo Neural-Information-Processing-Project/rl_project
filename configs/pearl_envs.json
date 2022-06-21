@@ -1,7 +1,7 @@
 {
   "safelife-dir": {
-    "n_train_tasks": 2,
-    "n_eval_tasks": 2,
+    "n_train_tasks": 1,
+    "n_eval_tasks": 1,
     "n_tasks": 2,
     "randomize_tasks": true,
     "low_gear": false,

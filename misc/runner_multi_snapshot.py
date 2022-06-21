@@ -2,6 +2,9 @@ import numpy as np
 import torch
 from collections import deque
 
+from memory_profiler import profile
+from pympler import asizeof
+
 class Runner:
     """
       This class generates batches of experiences
@@ -33,7 +36,7 @@ class Runner:
         self.hist_len = history_length
         self.tasks_buffer = tasks_buffer 
 
-
+    @profile
     def run(self, update_iter, keep_burning = False, task_id = None, early_leave = 200):
         '''
             This function add transition to replay buffer.
@@ -41,6 +44,8 @@ class Runner:
             rather than focus on just few ones
         '''
         obs = self.env.reset()
+        print("obs shape", obs.shape)
+        print("obs size", asizeof.asizeof(obs))
         done = False
         episode_timesteps = 0
         episode_reward = 0
@@ -90,6 +95,8 @@ class Runner:
             np_pre_actions = np.asarray(actions_hist, dtype=np.float32).flatten()  #(hist, action_dim) => (hist *action_dim,)
             np_pre_rewards = np.asarray(rewards_hist, dtype=np.float32) #(hist, )
             np_pre_obsers = np.asarray(obsvs_hist, dtype=np.float32).flatten()  #(hist, action_dim) => (hist *action_dim,)
+            print(len(obsvs_hist))
+            print(np_pre_obsers.shape)
 
             # Select action randomly or according to policy
             if keep_burning or update_iter < self.burn_in:
@@ -106,6 +113,7 @@ class Runner:
 
             # Perform action
             new_obs, reward, done, _ = self.env.step(action) 
+
             if episode_timesteps + 1 == self.max_path_length:
                 done_bool = 0
 
@@ -124,6 +132,20 @@ class Runner:
             np_next_hacts = np.asarray(next_hacts, dtype=np.float32).flatten()  #(hist, action_dim) => (hist *action_dim,)
             np_next_hrews = np.asarray(next_hrews, dtype=np.float32) #(hist, )
             np_next_hobvs = np.asarray(next_hobvs, dtype=np.float32).flatten() #(hist, )
+
+            #print("self.replay_buffer size", asizeof.asizeof(self.replay_buffer))
+            #print("self.tasks_buffer size", asizeof.asizeof(self.tasks_buffer))
+            #print("new obs size", asizeof.asizeof(new_obs))
+            #print("reward size", asizeof.asizeof(reward))
+
+            print("---------------------------------------")
+
+            print("obs hist size", asizeof.asizeof(obsvs_hist))
+
+            print("obs", asizeof.asizeof(obs)) 
+            print("new_obs", asizeof.asizeof(new_obs)) 
+            print("np_pre_obsers", asizeof.asizeof(np_pre_obsers))
+            print("np_next_hobvs", asizeof.asizeof(np_next_hobvs))
 
             # Store data in replay buffer
             self.replay_buffer.add((obs, new_obs, action, reward, done_bool,
